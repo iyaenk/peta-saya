@@ -4,45 +4,8 @@
 <meta charset="utf-8">
 <title>Peta Saya</title>
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
 
 <style>
-html,body{
-height:100%;
-margin:0;
-}
-
-#map{
-height:100vh;
-width:100%;
-}
-</style>
-
-</head>
-
-<body>
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-
-var map = L.map('map').setView([-6.2,106.816],10);
-
-L.tileLayer(
-'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-attribution:'© OpenStreetMap'
-}
-).addTo(map);
-
-L.marker([-6.2,106.816])
-.addTo(map)
-.bindPopup("Jakarta");
-
-</script>
-
-</body>
-</html>
+html, body {
+  margin: 0;
