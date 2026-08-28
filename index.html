@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <title>Peta Saya</title>
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1>
+https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
+
+<style>
 html,body{
 margin:0;
 height:100%;
@@ -22,7 +23,7 @@ width:100%;
 
 <div id="map"></div>
 
-<script src="https://unpkg.com4/dist/leaflet.jsscript>
+https://unpkg.com/leaflet@1.9.4/dist/leaflet.jsscript>
 
 <script>
 
@@ -31,7 +32,7 @@ var map = L.map('map');
 L.tileLayer(
 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
-attribution:'© OpenStreetMap'
+attribution: '© OpenStreetMap'
 }
 ).addTo(map);
 
@@ -39,28 +40,14 @@ fetch('lokasi.geojson')
 .then(response => response.json())
 .then(data => {
 
-var geojsonLayer = L.geoJSON(data, {
+var layer = L.geoJSON(data).addTo(map);
 
-onEachFeature: function(feature, layer){
+map.fitBounds(layer.getBounds());
 
-if(feature.properties){
-
-let nama =
-feature.properties.name ||
-feature.properties.Name ||
-feature.properties.nama ||
-"Lokasi";
-
-layer.bindPopup(nama);
-
-}
-
-}
-
-}).addTo(map);
-
-map.fitBounds(geojsonLayer.getBounds());
-
+})
+.catch(error => {
+console.log(error);
+alert("Gagal membaca lokasi.geojson");
 });
 
 </script>
