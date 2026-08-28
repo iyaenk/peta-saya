@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Peta Saya</title>
+var map = L.map('map');
 
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
+L.tileLayer(
+'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+  attribution: '&copy; OpenStreetMap'
+}
+).addTo(map);
 
-<style>
-html, body {
-  margin: 0;
+fetch('lokasi.geojson')
+.then(response => response.json())
+.then(data => {
+
+    var layer = L.geoJSON(data).addTo(map);
+
+    map.fitBounds(layer.getBounds());
+
+});
