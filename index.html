@@ -50,15 +50,24 @@ var layer = L.geoJSON(data, {
                 "https://www.google.com/maps?q&layer=c&cbll="
                 + lat + "," + lng;
 
-            marker.bindPopup(
-                "<b>" + nama + "</b><br><br>" +
-                "" + streetview +
-                "📷 Lihat Street View</a>"
-            );
-        }
+marker.bindPopup(
+`
+<b>${nama}</b><br><br>
 
-    }
+https://www.google.com/maps/search/?api=1&query=${lat},${lng}
+🗺️ Google Maps
+</a>
 
-}).addTo(map);
+<br><br>
 
-map.fitBounds(layer.getBounds());
+https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}
+🧭 Navigasi
+</a>
+
+<br><br>
+
+https://www.google.com/maps?q&layer=c&cbll=${lat},${lng}
+📷 Street View
+</a>
+`
+);
