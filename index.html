@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <title>Peta Saya</title>
 
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
 html,body{
-margin:0;
 height:100%;
+margin:0;
 }
 
 #map{
@@ -17,38 +18,29 @@ height:100vh;
 width:100%;
 }
 </style>
+
 </head>
 
 <body>
 
 <div id="map"></div>
 
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.jsscript>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
-var map = L.map('map');
+var map = L.map('map').setView([-6.2,106.816],10);
 
 L.tileLayer(
 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
-attribution: '© OpenStreetMap'
+attribution:'© OpenStreetMap'
 }
 ).addTo(map);
 
-fetch('lokasi.geojson')
-.then(response => response.json())
-.then(data => {
-
-var layer = L.geoJSON(data).addTo(map);
-
-map.fitBounds(layer.getBounds());
-
-})
-.catch(error => {
-console.log(error);
-alert("Gagal membaca lokasi.geojson");
-});
+L.marker([-6.2,106.816])
+.addTo(map)
+.bindPopup("Jakarta");
 
 </script>
 
