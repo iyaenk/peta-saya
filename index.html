@@ -1,10 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Peta Saya</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+}
+</style>
+
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
 var map = L.map('map');
 
 L.tileLayer(
-'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-{
-  attribution: '&copy; OpenStreetMap'
-}
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '© OpenStreetMap'
+    }
 ).addTo(map);
 
 fetch('lokasi.geojson')
@@ -15,4 +44,12 @@ fetch('lokasi.geojson')
 
     map.fitBounds(layer.getBounds());
 
+})
+.catch(error => {
+    console.error(error);
 });
+
+</script>
+
+</body>
+</html>
