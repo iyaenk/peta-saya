@@ -27,29 +27,38 @@ html, body {
 
 <script>
 
-var map = L.map('map');
+var layer = L.geoJSON(data, {
 
-L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution: '© OpenStreetMap'
+    onEachFeature: function(feature, marker){
+
+        if(feature.geometry.type === "Point"){
+
+            var lng = feature.geometry.coordinates[0];
+            var lat = feature.geometry.coordinates[1];
+
+            var nama = "Lokasi";
+
+            if(feature.properties){
+                nama =
+                    feature.properties.name ||
+                    feature.properties.Name ||
+                    feature.properties.nama ||
+                    "Lokasi";
+            }
+
+            var streetview =
+                "https://www.google.com/maps?q&layer=c&cbll="
+                + lat + "," + lng;
+
+            marker.bindPopup(
+                "<b>" + nama + "</b><br><br>" +
+                "" + streetview +
+                "📷 Lihat Street View</a>"
+            );
+        }
+
     }
-).addTo(map);
 
-fetch('lokasi.geojson')
-.then(response => response.json())
-.then(data => {
+}).addTo(map);
 
-    var layer = L.geoJSON(data).addTo(map);
-
-    map.fitBounds(layer.getBounds());
-
-})
-.catch(error => {
-    console.error(error);
-});
-
-</script>
-
-</body>
-</html>
+map.fitBounds(layer.getBounds());
